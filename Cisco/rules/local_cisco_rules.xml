@@ -1,0 +1,16 @@
+<group name="cisco,copy,syslog">
+
+  <!-- Inicio de copia de config -->
+  <rule id="101600" level="10">
+    <decoded_as>cisco-copy-filecpy</decoded_as>
+    <description>Cisco - Intento de copia de configuración</description>
+  </rule>
+
+  <!-- Copia completada -->
+  <rule id="101601" level="10">
+    <decoded_as>cisco-copy-trap</decoded_as>
+    <match>The copy operation was completed successfully</match>
+    <description>Cisco - Copia de configuración completada exitosamente</description>
+  </rule>
+
+</group>
