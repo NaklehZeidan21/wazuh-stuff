@@ -1,0 +1,12 @@
+<!-- tested on CBS250/350 -->
+<decoder name="cisco-copy-filecpy">
+  <prematch>%COPY-I-FILECPY</prematch>
+  <regex>%COPY-I-FILECPY:\s+Files Copy - source URL ([^\s]+)\s+destination URL ([^\s]+)</regex>
+  <order>copy_src, copy_dst</order>
+</decoder>
+
+<decoder name="cisco-copy-trap">
+  <prematch>%COPY-N-TRAP</prematch>
+  <regex>%COPY-N-TRAP:\s+(.*)$</regex>
+  <order>copy_message</order>
+</decoder>
