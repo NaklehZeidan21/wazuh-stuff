@@ -1,5 +1,4 @@
-<group name="cisco,copy,syslog">
-
+<!--copy-->
   <!-- Inicio de copia de config -->
   <rule id="101600" level="10">
     <decoded_as>cisco-copy-filecpy</decoded_as>
@@ -13,4 +12,40 @@
     <description>Cisco - Copia de configuración completada exitosamente</description>
   </rule>
 
-</group>
+
+
+<!--ssh auth rejected-->
+<rule id="100220" level="7">
+  <decoded_as>cisco-ssh-reject</decoded_as>
+  <match>IP</match>
+  <description>Cisco Switch -  SSH authentication rejected for source IP $(srcip)</description>
+  <group>authentication_failed,syslog</group>
+</rule>
+
+
+<!--ssh auth OK-->
+  <rule id="101547" level="3">
+    <decoded_as>cisco-aaa-cli-ssh</decoded_as>
+    <match>IP</match>
+    <description>Cisco Switch - SSH CLI session accepted for user $(user) from $(srcip)</description>
+    <group>authentication_success,syslog</group>
+  </rule>
+
+
+<!--auth web ok-->
+  <rule id="101547" level="3">
+    <decoded_as>cisco-aaa-cli-ssh</decoded_as>
+    <match>IP</match>
+    <description>Cisco Switch - SSH CLI session accepted for user $(user) from $(srcip)</description>
+    <group>authentication_success,syslog</group>
+  </rule>
+
+
+<!--auth web rejected-->
+
+<rule id="103550" level="7">
+    <decoded_as>cisco-aaa-reject</decoded_as>
+    <match>IP</match>
+    <description>Cisco Switch - WEB connection REJECTED from $(srcip) to $(dstip)</description>
+    <group>authentication_failed,syslog</group>
+  </rule>
