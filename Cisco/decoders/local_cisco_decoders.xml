@@ -1,4 +1,5 @@
 <!-- tested on CBS250/350 -->
+<!--Changes-->
 <decoder name="cisco-copy-filecpy">
   <prematch>%COPY-I-FILECPY</prematch>
   <regex>%COPY-I-FILECPY:\s+Files Copy - source URL ([^\s]+)\s+destination URL ([^\s]+)</regex>
@@ -10,3 +11,35 @@
   <regex>%COPY-N-TRAP:\s+(.*)$</regex>
   <order>copy_message</order>
 </decoder>
+
+
+<!--ssh/cli reject-->
+<decoder name="cisco-ssh-reject">
+  <prematch>%AAA-W-REJECT: New ssh connection</prematch>
+  <regex>%AAA-W-REJECT: New ssh connection, source ([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+) destination ([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\s*R>
+  <order>srcip, dstip</order>
+</decoder>
+
+<!-- cli auth ok/-->
+<decoder name="cisco-aaa-cli-ssh">
+  <prematch>%AAA-I-CONNECT: User CLI session</prematch>
+  <regex>%AAA-I-CONNECT: User CLI session for user (\S+).*?, source (\S+) destination (\S+) ([A-Z]+)</regex>
+  <order>user,srcip,dstip,status</order>
+</decoder>
+
+<!--http auth ok-->
+<decoder name="cisco-aaa-connect">
+  <prematch>%AAA-I-CONNECT: New</prematch>
+  <regex>%AAA-I-CONNECT: New (\S+) connection for user (\S+), source (\S+) destination (\S+) ([A-Z]+)</regex>
+  <order>user,srcip,dstip,status</order>
+</decoder>
+
+<!--  Web Auth Reject -->
+<decoder name="cisco-aaa-reject">
+  <prematch>%AAA-W-REJECT: New https</prematch>
+  <regex>%AAA-W-REJECT: New https connection, source (\S+) destination (\S+)\s+(\S+)</regex>
+  <order>user,srcip,dstip,status</order>
+</decoder>
+
+
+
